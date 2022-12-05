@@ -5,11 +5,11 @@ def choose_input():
     files = listdir('inputs/')
     cont = 0
     for i in files:
-        print('Num {}: {}'.format(str(cont),i),end='|\n')
+        print('Num {}: {}'.format(str(cont),i),end=' | ')
         cont += 1
     
-        num = int(input('Escolha o input:'))
-        return files[num]
+    num = int(input('\nEscolha o input: '))
+    return files[num]
     
 def get():
     n = 0
@@ -53,7 +53,7 @@ def workcheck(solicitation, available, n):
             break
         else:
             work = True
-        return work  
+    return work  
     
 def show(max, allocation,n,m):
     print('N = {}'.format(n))
@@ -106,7 +106,7 @@ def main():
     
         for i in finish:
             if not i:
-                print("O sistema ainda não esta seguro{}".format(finish))
+                print("O sistema ainda não esta seguro{}\n:".format(finish))
                 limit += 1
                 break
             elif i:
