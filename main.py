@@ -1,4 +1,4 @@
-import csv
+from csv import reader
 from os import listdir
 
 def choose_input():
@@ -19,7 +19,7 @@ def get():
     available = []
 
     with open('inputs/' + choose_input(), newline='') as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=',')
+        csv_reader = reader(csv_file, delimiter=',')
         
         line_count = 0
         
@@ -111,7 +111,6 @@ def main():
             if i:
                 safe = True
             else:
-                print(finish)
                 print("O sistema ainda não esta seguro{}\n:".format(finish))
                 limit += 1
                 safe = False
