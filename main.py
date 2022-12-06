@@ -10,7 +10,7 @@ def choose_input():
     
     num = int(input('\nEscolha o input: '))
     return files[num]
-    
+
 def get():
     n = 0
     m = 0
@@ -54,75 +54,66 @@ def workcheck(solicitation, available, n):
         else:
             work = True
     return work  
-    
+
 def show(max, allocation, available,n,m):
-    print('N = {}'.format(n))
+    print('\nN = {}'.format(n))
     print('M = {}'.format(m))
+    
     print('\nAllocation')
     for i in range(n):
         print('P' + str(i), end=' ')
         print(allocation[i])
+        
     print('\nMax')
     for i in range(n):
         print('P' + str(i), end=' ')
         print(max[i])
-    print('\n',end='')
-    print('Available')
-    print(available, end='\n')
+    print('')
     
+    print('Available')
+    print(available, end='\n\n')
+
 def main():
     
     #etapa 1--------------------------------
-    
     n, m, allocation, max, available = get()
     
-    show(max, allocation, available,n,m)
+    show(max, allocation, available, n, m)
     
     finish = [False]*n
     
     limit = 0
     safe = False
-    line = []
     finish_order = []
     
     #etapa 2--------------------------------
-    
-    while not safe:
-    
+    while not safe and limit < n+1:
         for i in range(n):
             line = []
             for j in range(m):
                 line.append(max[i][j] - allocation[i][j])
                 
-            need = line
-            
-    #etapa 3--------------------------------
+            need = line        
     
             if finish[i] == False and workcheck(need,available, m):
+                #etapa 3--------------------------------
                 finish[i] = True
                 finish_order.append('P'+ str(i))
                 
                 for j in range(m):
                     available[j] = available[j] + allocation[i][j]
-                    
-    #etapa 4--------------------------------
-    
-        for i in finish:
-            if i:
-                safe = True
-            else:
-                print("O sistema ainda não esta seguro{}\n:".format(finish))
-                limit += 1
-                safe = False
-                break
+        #etapa 4--------------------------------
+        if len(set(finish)) == 1 and finish[0]:
+            safe = True
+        else:
+            print("O sistema ainda não esta seguro {}\n:".format(finish))
+            limit += 1
+            safe = False
             
-        if limit > n:
-            break
-                
     if safe:
-        print("\n--------------------------------------------------------------------------\nO sistema esta seguro para a ordem {}".format(finish_order))
+        print(":\nO sistema esta seguro para a ordem {}".format(finish_order))
     else:
         print("O sistema não esta seguro {}".format(finish))
-    
+
 if __name__ == "__main__":
     main()
